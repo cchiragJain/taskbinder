@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 /* PAGES */
 import DashBoard from "./pages/dashboard/Dashboard";
@@ -7,27 +12,49 @@ import Login from "./pages/login/Login";
 import Project from "./pages/project/Project";
 import Signup from "./pages/signup/Signup";
 
-/* STYLES AND COMPONENTS */
+/* HOOKS */
+import { useAuthContext } from "./hooks/useAuthContext";
+
+/* STYLES, COMPONENTS */
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 
 const App = () => {
+  const { authIsReady, user } = useAuthContext();
+
   return (
     <div className="App">
-      <Router>
-        <Sidebar />
-        <div className="container">
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<DashBoard />} />
-            <Route path="/create" element={<Create />} />
-            <Route path="/projects/:id" element={<Project />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-          </Routes>
-        </div>
-      </Router>
+      {authIsReady && (
+        <Router>
+          <Sidebar />
+          <div className="container">
+            <Navbar />
+            <Routes>
+              <Route
+                path="/"
+                element={user ? <DashBoard /> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/login"
+                element={!user ? <Login /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/signup"
+                element={!user ? <Signup /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/create"
+                element={user ? <Create /> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/projects/:id"
+                element={user ? <Project /> : <Navigate to="/login" />}
+              />
+            </Routes>
+          </div>
+        </Router>
+      )}
     </div>
   );
 };
