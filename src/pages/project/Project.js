@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useDocument } from "../../hooks/useDocument";
 
 /* COMPONENETS & STYLES */
+import ProjectSummary from "./ProjectSummary";
 import "./Project.css";
 
 const Project = () => {
@@ -19,7 +20,7 @@ const Project = () => {
 
   return (
     <div className="project-details">
-      <h1>{document.name}</h1>
+      <ProjectSummary project={document} />
     </div>
   );
 };
