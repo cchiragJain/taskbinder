@@ -54,6 +54,7 @@ const Signup = () => {
         <span>Email:</span>
         <input
           type="email"
+          value={email}
           required
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -62,6 +63,7 @@ const Signup = () => {
         <span>Password:</span>
         <input
           type="password"
+          value={password}
           required
           minLength={4}
           maxLength={8}
@@ -72,6 +74,7 @@ const Signup = () => {
         <span>Display name:</span>
         <input
           type="text"
+          value={displayName}
           required
           onChange={(e) => setDisplayName(e.target.value)}
         />
@@ -88,7 +91,7 @@ const Signup = () => {
       )}
       {isPending && (
         <button className="btn" disabled>
-          Loading
+          Signing up...
         </button>
       )}
       {error && <div className="error">{error}</div>}
