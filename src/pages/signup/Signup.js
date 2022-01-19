@@ -12,7 +12,7 @@ const Signup = () => {
 
   const { signup, isPending, error } = useSignup();
 
-  const submitHandler = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     signup(email, password, displayName, thumbnail);
   };
@@ -48,7 +48,7 @@ const Signup = () => {
   };
 
   return (
-    <form onSubmit={submitHandler} className="auth-form">
+    <form onSubmit={handleSubmit} className="auth-form">
       <h2>Sign Up</h2>
       <label>
         <span>Email:</span>

@@ -16,7 +16,7 @@ const ProjectComments = ({ project }) => {
 
   const { comments } = project;
 
-  const submitHandler = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // create comment object
@@ -60,7 +60,7 @@ const ProjectComments = ({ project }) => {
           ))}
       </ul>
 
-      <form className="add-comment" onSubmit={submitHandler}>
+      <form className="add-comment" onSubmit={handleSubmit}>
         <label>
           <span>Add new comment:</span>
           <textarea

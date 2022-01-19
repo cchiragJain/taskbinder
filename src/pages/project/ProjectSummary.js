@@ -1,7 +1,23 @@
-/* COMPONENTS */
+import { useNavigate } from "react-router-dom";
+
+/* HOOKS */
+import { useFirestore } from "../../hooks/useFirestore";
+import { useAuthContext } from "../../hooks/useAuthContext";
+
+/* COMPONENTS & STYLES */
 import Avatar from "../../components/Avatar/Avatar";
 
 const ProjectSummary = ({ project }) => {
+  const navigate = useNavigate();
+
+  const { user } = useAuthContext();
+  const { deleteDocument } = useFirestore("projects");
+
+  const handleClick = () => {
+    deleteDocument(project.id);
+    navigate("/");
+  };
+
   return (
     <div>
       <div className="project-summary">
@@ -19,6 +35,12 @@ const ProjectSummary = ({ project }) => {
           ))}
         </div>
       </div>
+      {/* project can be deleted by the owner only */}
+      {user.uid === project.createdBy.id && (
+        <button className="btn" onClick={handleClick}>
+          Mark as Complete
+        </button>
+      )}
     </div>
   );
 };

@@ -47,7 +47,7 @@ const Create = () => {
     }
   }, [documents]);
 
-  const submitHandler = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setFormError(null);
 
@@ -97,7 +97,7 @@ const Create = () => {
   return (
     <div className="create-form">
       <h2 className="page-title">Create a new Project</h2>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={handleSubmit}>
         <label>
           <span>Project name:</span>
           <input

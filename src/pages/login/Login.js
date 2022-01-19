@@ -9,14 +9,14 @@ const Login = () => {
 
   const { login, error, isPending } = useLogin();
 
-  const submitHandler = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(email, password);
     login(email, password);
   };
 
   return (
-    <form onSubmit={submitHandler} className="auth-form">
+    <form onSubmit={handleSubmit} className="auth-form">
       <h2>Login</h2>
       <label>
         <span>Email:</span>
