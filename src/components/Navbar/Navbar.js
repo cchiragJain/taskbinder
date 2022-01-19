@@ -6,7 +6,7 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 
 /* STYLES AND IMAGES */
 import "./Navbar.css";
-import TempleLogo from "../../assets/temple.svg";
+import Tasks from "../../assets/tasks.svg";
 
 const Navbar = () => {
   const { logout, isPending } = useLogout();
@@ -16,7 +16,7 @@ const Navbar = () => {
     <nav className="navbar">
       <ul>
         <li className="logo">
-          <img src={TempleLogo} alt="temple logo" />
+          <img src={Tasks} alt="temple logo" />
           <span>
             <Link to="/">Task Binder</Link>
           </span>
