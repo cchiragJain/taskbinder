@@ -15,10 +15,10 @@ import Signup from "./pages/signup/Signup";
 /* HOOKS */
 import { useAuthContext } from "./hooks/useAuthContext";
 
-/* STYLES, COMPONENTS */
-import "./App.css";
+/* COMPONENTS, STYLES */
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+import "./App.css";
 
 const App = () => {
   const { authIsReady, user } = useAuthContext();
