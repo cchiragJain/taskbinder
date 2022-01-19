@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 /* HOOKS */
 import { useLogout } from "../../hooks/useLogout";
@@ -15,15 +15,14 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <ul>
+        <li className="logo">
+          <img src={TempleLogo} alt="temple logo" />
+          <span>
+            <Link to="/">Task Binder</Link>
+          </span>
+        </li>
         {!user && (
           <>
-            <li className="logo">
-              <img src={TempleLogo} alt="temple logo" />
-              <span>
-                <NavLink to="/">Task Binder</NavLink>
-              </span>
-            </li>
-
             <li>
               <NavLink to="/login">Login</NavLink>
             </li>

@@ -10,6 +10,7 @@ import "./Project.css";
 
 const Project = () => {
   const { id } = useParams();
+  // useDocument is real time listener
   const { document, error } = useDocument("projects", id);
 
   if (error) {
@@ -22,7 +23,7 @@ const Project = () => {
   return (
     <div className="project-details">
       <ProjectSummary project={document} />
-      <ProjectComments />
+      <ProjectComments project={document} />
     </div>
   );
 };

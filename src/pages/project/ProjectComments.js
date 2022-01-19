@@ -1,17 +1,25 @@
 import { useState } from "react";
 
 /* HOOKS & UTILS */
+import { useFirestore } from "../../hooks/useFirestore";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { timestamp } from "../../firebase/config";
 
-const ProjectComments = () => {
+/* STYLES & COMPONENTS */
+import Avatar from "../../components/Avatar/Avatar";
+
+const ProjectComments = ({ project }) => {
   const { user } = useAuthContext();
+  const { updateDocument, response } = useFirestore("projects");
 
   const [newComment, setNewComment] = useState("");
 
-  const handleSubmit = async (e) => {
+  const { comments } = project;
+
+  const submitHandler = async (e) => {
     e.preventDefault();
 
+    // create comment object
     const commentToAdd = {
       displayName: user.displayName,
       photoURL: user.photoURL,
@@ -20,14 +28,39 @@ const ProjectComments = () => {
       id: "_" + Math.random().toString(36).substring(2, 9),
     };
 
-    console.log(commentToAdd);
+    // update document with new comment
+    await updateDocument(project.id, {
+      comments: [...project.comments, commentToAdd],
+    });
+
+    // for new comments reset the state
+    if (!response.error) {
+      setNewComment("");
+    }
   };
 
   return (
     <div className="project-comments">
       <h4>Project Comments</h4>
+      <ul>
+        {comments.length > 0 &&
+          comments.map((comment) => (
+            <li key={comment.id}>
+              <div className="comment-author">
+                <Avatar src={comment.photoURL} />
+                <p>{comment.displayName}</p>
+              </div>
+              <div className="comment-date">
+                <p>date here</p>
+              </div>
+              <div className="comment-content">
+                <p>{comment.content}</p>
+              </div>
+            </li>
+          ))}
+      </ul>
 
-      <form className="add-comment" onSubmit={handleSubmit}>
+      <form className="add-comment" onSubmit={submitHandler}>
         <label>
           <span>Add new comment:</span>
           <textarea
