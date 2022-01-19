@@ -18,6 +18,7 @@ import { useAuthContext } from "./hooks/useAuthContext";
 /* COMPONENTS, STYLES */
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+import OnlineUsers from "./components/OnlineUsers";
 import "./App.css";
 
 const App = () => {
@@ -53,6 +54,7 @@ const App = () => {
               />
             </Routes>
           </div>
+          {user && <OnlineUsers />}
         </Router>
       )}
     </div>

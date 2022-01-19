@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 /* HOOKS */
 import { useLogout } from "../hooks/useLogout";
@@ -20,15 +20,15 @@ const Navbar = () => {
             <li className="logo">
               <img src={TempleLogo} alt="temple logo" />
               <span>
-                <Link to="/">Task Binder</Link>
+                <NavLink to="/">Task Binder</NavLink>
               </span>
             </li>
 
             <li>
-              <Link to="/login">Login</Link>
+              <NavLink to="/login">Login</NavLink>
             </li>
             <li>
-              <Link to="/signup">Signup</Link>
+              <NavLink to="/signup">Signup</NavLink>
             </li>
           </>
         )}
