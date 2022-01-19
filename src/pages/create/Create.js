@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useCollection } from "../../hooks/useCollection";
 import Select from "react-select";
 
 /* STYLES */
 import "./Create.css";
 
-/* ALL CATEGORIES FOR SELECT */
+/* ALL PROJECT CATEGORIES FOR SELECT */
 const categories = [
   { value: "development", label: "Development" },
   { value: "design", label: "Design" },
@@ -13,18 +14,33 @@ const categories = [
 ];
 
 const Create = () => {
+  const { documents } = useCollection("users");
+
   // form field values
   const [name, setName] = useState("");
   const [details, setDetails] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [category, setCategory] = useState("");
+  const [users, setUsers] = useState([]);
   const [assignedUsers, setAssignedUsers] = useState([]);
   const [formError, setFormError] = useState(null);
+
+  // create user values for react-select
+  useEffect(() => {
+    if (documents) {
+      setUsers(
+        documents.map((user) => {
+          return { value: { ...user, id: user.id }, label: user.displayName };
+        })
+      );
+    }
+  }, [documents]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
     console.log(name, details, dueDate, category.value, assignedUsers);
   };
+
   return (
     <div className="create-form">
       <h2 className="page-title">Create a new Project</h2>
@@ -66,10 +82,13 @@ const Create = () => {
         <label>
           <span>Assign to:</span>
           {/* add select here later */}
+          <Select
+            onChange={(option) => setAssignedUsers(option)}
+            options={users}
+            isMulti
+          />
         </label>
-
         <button className="btn">Add Project</button>
-
         {formError && <p className="error">{formError}</p>}
       </form>
     </div>
