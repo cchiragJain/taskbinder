@@ -1,8 +1,8 @@
 /* HOOKS */
-import { useCollection } from "../hooks/useCollection";
+import { useCollection } from "../../hooks/useCollection";
 
 /* COMPONENTS & STYLES */
-import Avatar from "./Avatar";
+import Avatar from "../Avatar/Avatar";
 import "./OnlineUsers.css";
 
 const OnlineUsers = () => {

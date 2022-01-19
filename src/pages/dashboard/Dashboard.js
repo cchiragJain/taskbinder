@@ -1,9 +1,18 @@
+/* HOOKS */
+import { useCollection } from "../../hooks/useCollection";
+
+/* COMPONENTS & STYLES */
+import ProjectList from "../../components/ProjectList/ProjectList";
 import "./Dashboard.css";
 
 const Dashboard = () => {
+  const { documents, error } = useCollection("projects");
+
   return (
     <div>
-      <h1>Dashboard</h1>
+      <h2 className="page-title">Dashboard</h2>
+      {error && <p className="error">{error}</p>}
+      {documents && <ProjectList projects={documents} />}
     </div>
   );
 };

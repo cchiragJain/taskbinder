@@ -2,13 +2,13 @@
 import { NavLink } from "react-router-dom";
 
 /* HOOKS */
-import { useAuthContext } from "../hooks/useAuthContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 /* COMPONENTS, STYLES, & IMAGES */
-import Avatar from "./Avatar";
+import Avatar from "../Avatar/Avatar";
 import "./Sidebar.css";
-import DashboardIcon from "../assets/dashboard_icon.svg";
-import AddIcon from "../assets/add_icon.svg";
+import DashboardIcon from "../../assets/dashboard_icon.svg";
+import AddIcon from "../../assets/add_icon.svg";
 
 const Sidebar = () => {
   const { user } = useAuthContext();

@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
 
 /* HOOKS */
-import { useLogout } from "../hooks/useLogout";
-import { useAuthContext } from "../hooks/useAuthContext";
+import { useLogout } from "../../hooks/useLogout";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 /* STYLES AND IMAGES */
 import "./Navbar.css";
-import TempleLogo from "../assets/temple.svg";
+import TempleLogo from "../../assets/temple.svg";
 
 const Navbar = () => {
   const { logout, isPending } = useLogout();

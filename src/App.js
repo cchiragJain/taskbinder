@@ -16,9 +16,9 @@ import Signup from "./pages/signup/Signup";
 import { useAuthContext } from "./hooks/useAuthContext";
 
 /* COMPONENTS, STYLES */
-import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
-import OnlineUsers from "./components/OnlineUsers";
+import Navbar from "./components/Navbar/Navbar";
+import Sidebar from "./components/Sidebar/Sidebar";
+import OnlineUsers from "./components/OnlineUsers/OnlineUsers";
 import "./App.css";
 
 const App = () => {
