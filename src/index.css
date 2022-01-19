@@ -50,10 +50,6 @@ ul {
   background-color: var(--primary-color);
 }
 
-.btn:disabled {
-  background-color: #b597ff;
-}
-
 /* forms */
 label {
   display: block;
