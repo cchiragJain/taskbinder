@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 
 /* HOOKS & UTILS*/
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
+import { useFirestore } from "../../hooks/useFirestore";
 import { timestamp } from "../../firebase/config";
 
 /* STYLES */
@@ -18,6 +20,10 @@ const categories = [
 ];
 
 const Create = () => {
+  const navigate = useNavigate();
+
+  const { addDocument, response } = useFirestore("projects");
+
   const { user } = useAuthContext();
   const { documents } = useCollection("users");
 
@@ -70,6 +76,7 @@ const Create = () => {
       id: user.uid,
     };
 
+    // project object
     const project = {
       name,
       details,
@@ -80,7 +87,11 @@ const Create = () => {
       comments: [],
     };
 
-    console.log(project);
+    // save to projects collection and redirect to dashboard if no error
+    await addDocument(project);
+    if (!response.error) {
+      navigate("/");
+    }
   };
 
   return (
