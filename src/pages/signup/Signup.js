@@ -7,10 +7,41 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
+  const [thumbnailError, setThumbnailError] = useState(null);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(email, password, displayName);
+    console.log(email, password, displayName, thumbnail);
+  };
+
+  const handleFileChange = (e) => {
+    // if selected something before and again fires
+    setThumbnail(null);
+
+    let selected = e.target.files[0];
+    // console.log(selected);
+
+    if (!selected) {
+      setThumbnailError("Please select a file");
+      return;
+    }
+
+    // if not image
+    if (!selected.type.includes("image")) {
+      setThumbnailError("Selected file must be an image");
+      return;
+    }
+
+    // if size > 100kb
+    // divide size by 100
+    if (selected.size > 100000) {
+      setThumbnailError("Image file size must be less than 100kb");
+      return;
+    }
+
+    setThumbnailError(null);
+    setThumbnail(selected);
+    console.log("thumbnail updated");
   };
 
   return (
@@ -44,7 +75,8 @@ const Signup = () => {
       </label>
       <label>
         <span>Profile thumbnail:</span>
-        <input type="file" />
+        <input type="file" required onChange={handleFileChange} />
+        {thumbnailError && <div className="error">{thumbnailError}</div>}
       </label>
       <button type="submit" className="btn">
         Sign up
